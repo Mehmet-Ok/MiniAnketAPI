@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using MiniAnketDapper.DTOs;
 using MiniAnketDapper.Services;
 
 namespace MiniAnketDapper.Controllers
@@ -13,6 +14,17 @@ namespace MiniAnketDapper.Controllers
         {
             _authService = authService;
         }
+
+        [HttpPost("register")]
+        public async Task<IActionResult> Register([FromBody] RegisterDto dto)
+        {
+            var success = await _authService.RegisterAsync(dto);
+            if (!success)
+                return BadRequest("Username is already taken.");
+
+            return Ok("User registered successfully.");
+        }
+
 
         // POST api/auth/login
         [HttpPost("login")]
