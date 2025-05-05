@@ -39,6 +39,12 @@ namespace MiniAnketDapper.Services
                 throw new Exception("Kullanıcı bulunamadı");
             }
 
+            // Seçenek sayısı kontrolü
+            if (request.Options == null || request.Options.Count < 2 || request.Options.Count > 5)
+            {
+                throw new ArgumentException("Anket seçenek sayısı 2 ile 5 arasında olmalıdır.");
+            }
+
             // Anketi eklemek için SQL sorgusunu yazın
             var insertPollSql = @"INSERT INTO polls (title, created_by) 
                       VALUES (@Title, @CreatedBy) 
