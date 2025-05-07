@@ -18,7 +18,7 @@ Projede kullanılan NuGet paketleri şunlardır:
 - **Npgsql** v9.0.3: PostgreSQL veritabanı ile bağlantı kurmak için Npgsql .NET kütüphanesi.
 - **Swashbuckle.AspNetCore** v6.6.2: API dokümantasyonu için Swagger entegrasyonu.
 
-## Proje Kurulumu
+## Proje Kurulumu ve Kullanımı
 
 ### Adım 1: PostgreSQL Veritabanı Kurulumu
 
@@ -31,4 +31,25 @@ Yada
 ```
 psql -U postgres -d surveydb -f dbfiles/init.sql
 ```
+
+## Kullanıcı Kaydı ve Giriş Yapma
+
+Projeyi kurduktan sonra API'yi kullanabilmek için aşağıdaki adımları takip edin:
+
+1. **Swagger Arayüzünde Kullanıcı Kaydı Oluşturun**:
+   - API'yi çalıştırdıktan sonra Swagger UI'ye gidin (örneğin, `http://localhost:{port}/swagger`).
+   - **Kullanıcı kaydı** oluşturmak için ilgili **POST /api/register** endpoint'ini kullanın.
+   
+2. **Login API'sini Kullanarak Giriş Yapın**:
+   - Kaydınızı tamamladıktan sonra, **POST /api/login** endpoint'ini kullanarak giriş yapın.
+   - Giriş yaptıktan sonra, döndürülen **JWT**'yi kopyalayın.
+
+3. **Authorization ile JWT ile Kimlik Doğrulaması Yapın**:
+   - Swagger UI ekranının sağ üst kısmında bulunan **Authorization** butonuna tıklayın.
+   - Açılan pencerede, "Bearer {kopyaladığınız JWT}" formatında token'ı girin.
+     - Örnek: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...`
+
+4. **API'leri Test Edin**:
+   - JWT token ile kimlik doğrulaması yapıldıktan sonra, Swagger UI üzerinden güvenli API'leri test edebilirsiniz.
+
 
